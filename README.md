@@ -1,4 +1,3 @@
-hoot
+Hoot PHP Framework
 ====
 
-Hoot PHP Framework

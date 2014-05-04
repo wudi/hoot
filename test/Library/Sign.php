@@ -15,7 +15,7 @@ class Sign
 {
 
     protected static $sign_error_info = ''; //错误信息
-    protected static $sign_encrypt_key; //签名密钥
+    protected static $sign_encrypt_key = '67f91ef0929a8febd5b068ae22e6bc67'; //签名密钥
 
     /**
      * 签名方法

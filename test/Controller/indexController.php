@@ -10,9 +10,7 @@
 
 namespace Controller;
 
-use \Slim\Controller;
-
-class indexController extends Controller
+class indexController extends baseController
 {
 
     public function __construct() {

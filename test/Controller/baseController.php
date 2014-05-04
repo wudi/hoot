@@ -29,11 +29,6 @@ class baseController extends Controller
     public function __construct() {
         parent::__construct();
 
-        //签名校验
-        /*if (Sign::checkSign($this->request->post()) === false) {
-            $this->error(Sign::getError(), -1);
-        }*/
-
         $this->post = $this->request->post();
         $this->get  = $this->request->get();
 
@@ -41,6 +36,11 @@ class baseController extends Controller
 
         //注册body内容处理函数
         $this->response->registerBodyFormater(__CLASS__ . "::bodyFormater");
+
+        //签名校验
+        /*if (Sign::checkSign($this->request->post()) === false) {
+            $this->error(Sign::getError(), -1);
+        }*/
     }
 
 

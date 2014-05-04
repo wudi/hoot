@@ -7,7 +7,7 @@ return array(
         'port'          => 3306,
         'username'      => 'root',
         'password'      => 'root',
-        'database_name' => '51aikan',
+        'database_name' => '',
         'charset'       => 'utf8'
     ),
 

@@ -1,8 +1,8 @@
 <?php
 
-require "/Users/pushy/Source/Slim/Slim.php";
-
 define('APP_PATH', dirname(__DIR__));
+
+require APP_PATH . "/../src/Slim/Slim.php";
 
 $config = require APP_PATH . DIRECTORY_SEPARATOR . 'Conf/config.php';
 

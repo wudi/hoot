@@ -37,6 +37,10 @@ class baseController extends Controller
         $this->post = $this->request->post();
         $this->get  = $this->request->get();
 
+        $this->app->contentType('application/json');
+
+        //注册body内容处理函数
+        $this->response->registerBodyFormater(__CLASS__ . "::bodyFormater");
     }
 
 
@@ -59,6 +63,20 @@ class baseController extends Controller
      */
     public function error($message, $ret = -1) {
         $this->app->halt(400, array('msg' => $message, 'ret' => $ret));
+    }
+
+
+    /**
+     * 响应body统一处理函数
+     *
+     * @param $body
+     * @return string
+     */
+    public function bodyFormater($body) {
+        $body = (array)$body;
+        $ret  = & $body['ret'];
+        $ret or ($body['ret'] = 0);
+        return json_encode($body);
     }
 
 

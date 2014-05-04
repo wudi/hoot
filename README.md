@@ -1,3 +1,5 @@
+![demo1](https://raw.githubusercontent.com/EagleWu/hoot/master/logo/hoot.png "Hoot")
+
 Hoot PHP Framework
 ====
 

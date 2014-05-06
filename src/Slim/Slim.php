@@ -134,9 +134,11 @@ class Slim
         if (file_exists($coreFile)) {
             require $coreFile;
         } else {
-            $appFile = APP_PATH . DIRECTORY_SEPARATOR . $fileName;
-            if (defined('APP_PATH') && file_exists($appFile)) {
-                require $appFile;
+            if (defined('APP_PATH')) {
+                $appFile = APP_PATH . DIRECTORY_SEPARATOR . $fileName;
+                if(file_exists($appFile)){
+                    require $appFile;
+                }
             }
         }
     }

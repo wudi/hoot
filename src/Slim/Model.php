@@ -12,8 +12,9 @@ namespace Slim;
 
 
 use Slim\Database\Medoo;
+use Slim\Interfaces\Model as ModelInterface;
 
-class Model extends Medoo
+class Model extends Medoo implements ModelInterface
 {
 
     /**
@@ -121,10 +122,10 @@ class Model extends Medoo
     /**
      * Alias of getInstance
      *
-     * @param null $options
-     * @return Model
+     * @param array $options
+     * @return \get_called_class()
      */
-    public static function model(array $options = array()) {
+    public static function model($options = array()) {
         return self::getInstance($options);
     }
 
@@ -133,7 +134,7 @@ class Model extends Medoo
      * @param array $options
      * @return Model
      */
-    private static function getInstance(array $options = array()) {
+    private static function getInstance($options = array()) {
         $className = get_called_class();
         $instance  = & self::$instance[$className];
         if (!$instance instanceof self) {

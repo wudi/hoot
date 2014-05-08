@@ -17,6 +17,10 @@ class Config
     protected static $config = array();
 
 
+    /**
+     * @param null $offset
+     * @return mixed
+     */
     public static function get($offset = NULL) {
         if (is_null($offset)) {
             return self::$config;

@@ -246,15 +246,17 @@ class Response implements \ArrayAccess, \Countable, \IteratorAggregate
      * Register body formater handler
      *
      * @param $callable
+     * @throws \Exception
      */
     public function registerBodyFormater($callable)
     {
         if(is_callable($callable))
         {
             $this->bodyFormater = $callable;
-            return true;
+        }else
+        {
+            throw new \Exception("BodyFormater not callable");
         }
-        return false;
     }
 
     /**

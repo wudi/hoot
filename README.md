@@ -8,7 +8,7 @@ A distribution of Slim with MVC and some advanced features
 
 1. Pretty support MVC structure. *(Advocate use library and kill controller)*
 
-2. Use [Medoo](https://github.com/catfan/Medoo) DB Driver. **Compatible** Support various SQL database, including MySQL, MSSQL, SQLite, MariaDB, Sybase, Oracle, PostgreSQL and more.
+2. Use [Medoo](https://github.com/catfan/Medoo) DB Driver. **Compatible** Support various SQL database, including MySQL, MSSQL, SQLite, MariaDB, Sybase, Oracle, PostgreSQL and so on.
 
 3. Support to register body formater of whole.
 

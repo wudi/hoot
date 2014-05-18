@@ -14,11 +14,6 @@ use \Slim\Interfaces\Singleton as SingletonInterface;
 abstract class Singleton implements SingletonInterface
 {
 
-    public function __construct() {
-
-    }
-
-
     /**
      * @var array
      */
@@ -38,15 +33,4 @@ abstract class Singleton implements SingletonInterface
         return self::$instance[$className];
     }
 
-
-    /**
-     * Clean up object and Release instance resource
-     * eg. Mysql, Memcache, Redis, Socket resoure and more.
-     */
-    public function __destruct() {
-        foreach (self::$instance as $instance) {
-            $instance->destory();
-        }
-    }
-
-} 
+}

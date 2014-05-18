@@ -13,13 +13,6 @@ namespace Slim\Interfaces;
 interface Singleton
 {
 
-    /**
-     * Some link handler should close in destory
-     *
-     * @return mixed
-     */
-    public function destory();
-
 
     /**
      * Alias Class Singleton::getInstance
@@ -30,4 +23,10 @@ interface Singleton
      * @return mixed
      */
     public static function getInstance($options = array());
+
+
+    /**
+     * Some link handler should close in destory
+     */
+    public function __destruct();
 }

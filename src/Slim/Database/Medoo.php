@@ -467,6 +467,38 @@ class Medoo
     }
 
     /**
+     * Begin Transaction
+     *
+     * @return \PDOStatement
+     */
+    public function startTrans()
+    {
+        $this->query('SET AUTOCOMMIT=0');
+        return $this->query('BEGIN');
+    }
+
+    /**
+     * Commit Transaction
+     *
+     * @return \PDOStatement
+     */
+    public function commit()
+    {
+        return $this->query('COMMIT');
+    }
+
+    /**
+     * Rollbacl Transaction
+     *
+     * @return \PDOStatement
+     */
+    public function rollback()
+    {
+        return $this->query('ROLLBACK');
+    }
+
+
+    /**
      * Get true table name by Model
      * Should overwrite the function in Model
      *

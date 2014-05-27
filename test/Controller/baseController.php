@@ -72,7 +72,7 @@ class baseController extends Controller
      * @param $body
      * @return string
      */
-    public function bodyFormater($body) {
+    public static function bodyFormater($body) {
         $body = (array)$body;
         $ret  = & $body['ret'];
         $ret or ($body['ret'] = 0);

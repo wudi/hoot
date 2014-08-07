@@ -1238,7 +1238,9 @@ class Slim
      * are returned to the HTTP client.
      */
     public function run() {
-        set_error_handler(array('\Slim\Slim', 'handleErrors'));
+        if(!$this->environment['is_cli']){
+           set_error_handler(array('\Slim\Slim', 'handleErrors'));
+        }
 
         //Apply final outer middleware layers
         if ($this->config('debug')) {
@@ -1294,7 +1296,9 @@ class Slim
                 $this->view()->setData('flash', $this->environment['slim.flash']);
             }
             $this->applyHook('slim.before');
-            ob_start();
+            if(!$this->environment['is_cli']){
+                ob_start();
+            }
             $this->applyHook('slim.before.router');
             $dispatched    = false;
             $matchedRoutes = $this->router->getMatchedRoutes($this->request->getMethod(), $this->request->getResourceUri());

@@ -99,6 +99,7 @@ class Environment implements \ArrayAccess, \IteratorAggregate
             'ACCEPT_CHARSET' => 'ISO-8859-1,utf-8;q=0.7,*;q=0.3',
             'USER_AGENT' => 'Slim Framework',
             'REMOTE_ADDR' => '127.0.0.1',
+            'RUN_PROTOCOL'=>'HTTP',
             'slim.url_scheme' => 'http',
             'slim.input' => '',
             'slim.errors' => @fopen('php://stderr', 'w')
@@ -120,16 +121,24 @@ class Environment implements \ArrayAccess, \IteratorAggregate
         } else {
             $env = array();
 
+            //Slim cli mode support
+            $isCli = PHP_SAPI == 'cli';
+            $argv  = $GLOBALS['argv'];  // from suffix 0
+
+            $cliUri          = isset($argv[1]) ? $argv[1] : '/';
+            $cliQueryString  = isset($argv[2]) ? $argv[2] : '';
+            $cliCookieString = isset($argv[3]) ? $argv[3] : '';
+
             //The HTTP request method
-            $env['REQUEST_METHOD'] = $_SERVER['REQUEST_METHOD'];
+            $env['REQUEST_METHOD'] = $isCli ? 'GET' : $_SERVER['REQUEST_METHOD'];
 
             //The IP
-            $env['REMOTE_ADDR'] = $_SERVER['REMOTE_ADDR'];
+            $env['REMOTE_ADDR'] = $isCli ? '127.0.0.1' : $_SERVER['REMOTE_ADDR'];
 
             // Server params
-            $scriptName = $_SERVER['SCRIPT_NAME']; // <-- "/foo/index.php"
-            $requestUri = $_SERVER['REQUEST_URI']; // <-- "/foo/bar?test=abc" or "/foo/index.php/bar?test=abc"
-            $queryString = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : ''; // <-- "test=abc" or ""
+            $scriptName = $isCli ? '/' : $_SERVER['SCRIPT_NAME']; // <-- "/foo/index.php"
+            $requestUri = $isCli ? $cliUri : $_SERVER['REQUEST_URI']; // <-- "/foo/bar?test=abc" or "/foo/index.php/bar?test=abc"
+            $queryString = $isCli ? $cliQueryString : (isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : ''); // <-- "test=abc" or ""
 
             // Physical path
             if (strpos($requestUri, $scriptName) !== false) {
@@ -148,10 +157,12 @@ class Environment implements \ArrayAccess, \IteratorAggregate
             $env['QUERY_STRING'] = $queryString;
 
             //Name of server host that is running the script
-            $env['SERVER_NAME'] = $_SERVER['SERVER_NAME'];
+            $env['SERVER_NAME'] = $isCli ? 'Slim' : $_SERVER['SERVER_NAME'];
 
             //Number of server port that is running the script
-            $env['SERVER_PORT'] = $_SERVER['SERVER_PORT'];
+            $env['SERVER_PORT'] = $isCli ? 80 : $_SERVER['SERVER_PORT'];
+
+            $env['HTTP_COOKIE'] = $isCli ? $cliCookieString : NULL;
 
             //HTTP request headers (retains HTTP_ prefix to match $_SERVER)
             $headers = \Slim\Http\Headers::extract($_SERVER);
@@ -171,6 +182,8 @@ class Environment implements \ArrayAccess, \IteratorAggregate
 
             //Error stream
             $env['slim.errors'] = @fopen('php://stderr', 'w');
+
+            $env['is_cli'] = $isCli;
 
             $this->properties = $env;
         }

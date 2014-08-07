@@ -27,7 +27,7 @@ abstract class Singleton implements SingletonInterface
     public static function getInstance($options = array()) {
         $className = get_called_class();
         $instance  = & self::$instance[$className];
-        if (!$instance instanceof self) {
+        if ( is_null($instance) ) {
             self::$instance[$className] = new $className($options);
         }
         return self::$instance[$className];

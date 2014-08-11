@@ -1,4 +1,4 @@
-Hoot PHP Framework
+Hoot Micro REST PHP Framework
 ====
 
 A distribution of Slim with MVC and some advanced features
@@ -13,8 +13,9 @@ A distribution of Slim with MVC and some advanced features
 3. Support to register body formater of whole.
 
 4. High performance to register routers. *(Don't worry about require to many files and no use for this request. No use No check iscallable and No require file)*
+5. Support run in CLI mode.
 
-5. Develop and more...
+6. Develop and more...
 
 ##Document
 Hoot: Wait moment
